@@ -2,18 +2,29 @@
 
 A complete example of a "CRUD" service (UserService) built with Nodejs.
 
-### Stack:
+---
 
+### Stack
+- Typescript
+- TypeORM
+- Swagger
+
+---
 
 ### Project layout
 
 ```
 |- src/
-|   |
-|   |- controller/                       // Folder containing REST Controllers (UserController)
-|   |- database/                         // Folder containing the database client
-|   |- service/                          // Service business logic classes (UserService)
-|   |- app.ts                            // Root file
+|   |- controllers/                       // Folder containing REST Controllers (UserController)
+|   |- database/                          // Folder containing the database client
+|   |- services/                          // Service business logic classes (UserService)
+|   |- middlewares/                       // Middlewares for request-response cycle
+|   |- models/                            // Contains the models for ORM (users.model)
+|   |- repositories/                      // Encapsulate the logic required to access data sources (UserRepository)
+|   |- routes/                            // All project routes (UserRouter)
+|   |- schema/                            // Schema validations
+|   |- utils/                             // File for utils functions
+|   |- app.ts                             // Root file
 ```
 
 ---
