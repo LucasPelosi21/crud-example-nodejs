@@ -1,0 +1,101 @@
+{
+  "info": {
+    "title": "CRUD API",
+    "version": "1.0.0",
+    "description": "A sample API"
+  },
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "authorization"
+      },
+      "XApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key"
+      }
+    }
+  },
+  "paths": {
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Retorna User",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "XApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON de User"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Criar um usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "lucas@teste.com.br"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "teste123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "XApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "User",
+      "description": "API de usuários."
+    }
+  ]
+}
