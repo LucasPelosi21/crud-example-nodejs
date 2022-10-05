@@ -4,9 +4,7 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  BeforeInsert,
 } from 'typeorm';
-import bcrypt from 'bcrypt';
 
 @Entity('users')
 export default class User {
@@ -28,9 +26,4 @@ export default class User {
     onUpdate: 'CURRENT_TIMESTAMP(6)',
   })
   updated_at: Date;
-
-  @BeforeInsert()
-  async setPassword() {
-    this.password = await bcrypt.hash(this.password, 10);
-  }
 }
