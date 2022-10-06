@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import UserService from '../services/UserService';
-import { storeUserSchema, updateUserSchema } from '../schema/UserSchema';
+import { storeUserSchema, updateUserSchema } from '../schemas/UserSchema';
+import Exception from '../utils/Exception';
 
 export default class UserController {
   declare service: UserService;
@@ -88,7 +89,7 @@ export default class UserController {
     req.body = await storeUserSchema
       .validate(req.body, { stripUnknown: true })
       .catch(err => {
-        throw new Error(err.errors.join(', '));
+        throw new Exception(400, err.errors.join(', '));
       });
 
     const obj = await this.service.store(req.body);
@@ -133,7 +134,7 @@ export default class UserController {
     req.body = await updateUserSchema
       .validate(req.body, { stripUnknown: true })
       .catch(err => {
-        throw new Error(err.errors.join(', '));
+        throw new Exception(400, err.errors.join(', '));
       });
 
     const obj = await this.service.updateData(req.params.id, req.body);

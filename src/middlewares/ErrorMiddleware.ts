@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from 'express';
+import Exception from '../utils/Exception';
 
 export default function errorMiddleware(
-  error: Error,
+  error: Exception,
   _req: Request,
   response: Response,
-  _: NextFunction,
+  _next: NextFunction,
 ): Response {
-  const { message, stack } = error;
-  return response.status(400).send({
+  const { message, status = 500 } = error;
+  return response.status(status).send({
     message: message || 'Something went wrong',
-    stack: stack || '',
+    status,
   });
 }
