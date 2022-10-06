@@ -25,35 +25,23 @@
     }
   },
   "paths": {
-    "/users/{id}": {
+    "/users": {
       "get": {
         "tags": [
           "User"
         ],
-        "summary": "Retorna User",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "schema": {
-              "type": "integer"
-            },
-            "required": true
-          }
-        ],
+        "summary": "Lista os usuários",
         "security": [
           {
-            "XApiKeyAuth": []
+            "ApiKeyAuth": []
           }
         ],
         "responses": {
           "200": {
-            "description": "JSON de User"
+            "description": "Usuários"
           }
         }
-      }
-    },
-    "/users": {
+      },
       "post": {
         "tags": [
           "User"
@@ -86,7 +74,116 @@
         ],
         "responses": {
           "200": {
-            "description": "User"
+            "description": "Retorna usuário criado"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Retorna User",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "XApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON de User"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Atualiza um usuário",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "lucas@teste.com.br"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "teste123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          },
+          {
+            "XApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna usuário atualizado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Deleta um usuário",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          },
+          {
+            "XApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna o usuário"
+          },
+          "404": {
+            "description": "usuário não encontrada"
           }
         }
       }
